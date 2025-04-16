@@ -20,6 +20,34 @@
                 }
             }
         },
+        "/api/invoices/global": {
+            "post": {
+                "tags": [
+                    "Invoices"
+                ],
+                "summary": "Crear factura global por valores",
+                "operationId": "cf6b493f882ee68972ca806b9ac1f2f2",
+                "responses": {
+                    "200": {
+                        "description": "Factura global creada"
+                    }
+                }
+            }
+        },
+        "/api/invoices/global-by-reference": {
+            "post": {
+                "tags": [
+                    "Invoices"
+                ],
+                "summary": "Crear factura global por referencias",
+                "operationId": "e9f99928714e6609a7aa86ffab9dae90",
+                "responses": {
+                    "200": {
+                        "description": "Factura global creada por referencias"
+                    }
+                }
+            }
+        },
         "/api/invoices/{id}": {
             "get": {
                 "tags": [
