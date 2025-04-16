@@ -15,8 +15,15 @@ Route::resource('products', ProductsController::class);
 
 Route::get('invoices', [InvoicesController::class, 'index']);
 Route::get('invoices/{id}', [InvoicesController::class, 'show']);
-Route::post('invoices/global', [InvoicesController::class, 'createGlobalInvoice']);
-Route::post('invoices/global-by-reference', [InvoicesController::class, 'createGlobalInvoiceByReference']);
+Route::post('invoices/factura-global-por-valores', [InvoicesController::class, 'facturaGlobalPorValores']);
+Route::post('invoices/factura-global-por-referencias', [InvoicesController::class, 'facturaGlobalPorReferencias']);
+Route::post('invoices/factura-con-iva-16', [InvoicesController::class, 'facturaConIva16']);
+Route::post('invoices/factura-iva-exento', [InvoicesController::class, 'facturaIvaExento']);
+
+
+
+
+
 
 // Product Routes
 // Route::prefix('products')->group(function () {

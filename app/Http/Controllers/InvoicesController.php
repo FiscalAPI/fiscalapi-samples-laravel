@@ -51,6 +51,30 @@ class InvoicesController extends Controller
     }
 
 
+    /**
+     * @OA\Get(
+     *     path="/api/invoices/{id}",
+     *     summary="Obtener factura por ID",
+     *     tags={"Invoices"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID de la factura",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(response=200, description="Detalles de la factura")
+     * )
+     * @param string $id
+     * @return JsonResponse
+     */
+    public function show(string $id): JsonResponse
+    {
+        $response = $this->fiscalApi->getInvoiceService()->get($id, true);
+        $data = $response->getJson();
+        return response()->json($data, $response->getStatusCode());
+    }
+
         /**
      * @OA\Post(
      *     path="/api/invoices/global",
@@ -60,7 +84,7 @@ class InvoicesController extends Controller
      * )
      * @return JsonResponse
      */
-    public function createGlobalInvoice(): JsonResponse
+    public function facturaGlobalPorValores(): JsonResponse
     {
         $currentDate = $this->getCurrentDate();
 
@@ -140,7 +164,7 @@ class InvoicesController extends Controller
      * )
      * @return JsonResponse
      */
-    public function createGlobalInvoiceByReference(): JsonResponse
+    public function facturaGlobalPorReferencias(): JsonResponse
     {
         $currentDate = $this->getCurrentDate();
 
@@ -192,56 +216,162 @@ class InvoicesController extends Controller
         return response()->json($data, $apiResponse->getStatusCode());
     }
 
-
-
-
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    * @OA\Post(
+    *     path="/api/invoices/income-with-iva",
+    *     summary="Crear factura de ingreso con IVA 16%",
+    *     tags={"Invoices"},
+    *     @OA\Response(response=200, description="Factura de ingreso creada con IVA 16%")
+    * )
+    * @return JsonResponse
+    */
+    public function facturaConIva16(): JsonResponse
     {
-        //
+    $currentDate = $this->getCurrentDate();
+
+    $invoice = [
+        'versionCode' => "4.0",
+        'series' => "F",
+        'date' => $currentDate, // Formato de fecha equivalente a DateTime.now()
+        'paymentFormCode' => "01",
+        'paymentMethodCode' => "PUE",
+        'currencyCode' => "MXN",
+        'typeCode' => "I",
+        'expeditionZipCode' => "42501",
+        'exchangeRate' => 1,
+        'exportCode' => "01",
+        'issuer' => [
+            'tin' => "FUNK671228PH6",
+            'legalName' => "KARLA FUENTE NOLASCO",
+            'taxRegimeCode' => "621",
+            'taxCredentials' => [
+                [
+                    'base64File' => $this->base64Cert,
+                    'fileType' => 0,
+                    'password' => $this->password
+                ],
+                [
+                    'base64File' => $this->base64Key,
+                    'fileType' => 1,
+                    'password' => $this->password
+                ]
+            ]
+        ],
+        'recipient' => [
+            'tin' => "EKU9003173C9",
+            'legalName' => "ESCUELA KEMPER URGATE",
+            'zipCode' => "42501",
+            'taxRegimeCode' => "601",
+            'cfdiUseCode' => "G01",
+            'email' => "someone@somewhere.com"
+        ],
+        'items' => [
+            [
+                'itemCode' => "01010101",
+                'quantity' => 9.5,
+                'unitOfMeasurementCode' => "E48",
+                'description' => "Invoicing software as a service",
+                'unitPrice' => 3587.75,
+                'taxObjectCode' => "02",
+                'itemSku' => "7506022301697",
+                'discount' => 255.85,
+                'itemTaxes' => [
+                    [
+                        'taxCode' => "002",
+                        'taxTypeCode' => "Tasa",
+                        'taxRate' => "0.160000",
+                        'taxFlagCode' => "T"
+                    ]
+                ]
+            ]
+        ]
+    ];
+
+    $apiResponse = $this->fiscalApi->getInvoiceService()->create($invoice);
+    $data = $apiResponse->getJson();
+    return response()->json($data, $apiResponse->getStatusCode());
     }
 
     /**
-     * @OA\Get(
-     *     path="/api/invoices/{id}",
-     *     summary="Obtener factura por ID",
+     * @OA\Post(
+     *     path="/api/factura-iva-exento",
+     *     summary="Crear factura con IVA exento",
      *     tags={"Invoices"},
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         description="ID de la factura",
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Response(response=200, description="Detalles de la factura")
+     *     @OA\Response(response=200, description="Factura con IVA exento creada")
      * )
-     * @param string $id
      * @return JsonResponse
      */
-    public function show(string $id): JsonResponse
+    public function facturaIvaExento(): JsonResponse
     {
-        $response = $this->fiscalApi->getInvoiceService()->get($id, true);
-        $data = $response->getJson();
-        return response()->json($data, $response->getStatusCode());
+        $currentDate = $this->getCurrentDate();
+
+        $invoiceExento = [
+            'versionCode' => "4.0",
+            'series' => "F",
+            'date' => $currentDate,
+            'paymentFormCode' => "01",
+            'paymentMethodCode' => "PUE",
+            'currencyCode' => "MXN",
+            'typeCode' => "I",
+            'expeditionZipCode' => "42501",
+            'exchangeRate' => 1,
+            'exportCode' => "01",
+            'issuer' => [
+                'tin' => "FUNK671228PH6",
+                'legalName' => "KARLA FUENTE NOLASCO",
+                'taxRegimeCode' => "621",
+                'taxCredentials' => [
+                    [
+                        'base64File' => $this->base64Cert,
+                        'fileType' => 0,
+                        'password' => $this->password
+                    ],
+                    [
+                        'base64File' => $this->base64Key,
+                        'fileType' => 1,
+                        'password' => $this->password
+                    ]
+                ]
+            ],
+            'recipient' => [
+                'tin' => "EKU9003173C9",
+                'legalName' => "ESCUELA KEMPER URGATE",
+                'zipCode' => "42501",
+                'taxRegimeCode' => "601",
+                'cfdiUseCode' => "G01",
+                'email' => "someone@somewhere.com"
+            ],
+            'items' => [
+                [
+                    'itemCode' => "01010101",
+                    'quantity' => 9.5,
+                    'unitOfMeasurementCode' => "E48", // Unidad de servicio
+                    'description' => "Invoicing software as a service",
+                    'unitPrice' => 3587.75,
+                    'taxObjectCode' => "02",
+                    'itemSku' => "7506022301697",
+                    'discount' => 255.85,
+                    'itemTaxes' => [
+                        [
+                            'taxCode' => "002", // 001=ISR, 002=IVA, 003=IEPS
+                            'taxTypeCode' => "Exento", // Tipo "Exento" para indicar que está exento de impuestos
+                            'taxFlagCode' => "T" // T=Traslado o R=Retención
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $apiResponse = $this->fiscalApi->getInvoiceService()->create($invoiceExento);
+        $data = $apiResponse->getJson();
+        return response()->json($data, $apiResponse->getStatusCode());
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+
+
+
+
 
      /**
      * Definir la fecha actual
