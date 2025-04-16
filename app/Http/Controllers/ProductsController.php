@@ -1,9 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Fiscalapi\Services\FiscalApiClient;
+
+
 
 /**
  * @OA\Info(
@@ -14,6 +19,15 @@ use Illuminate\Http\Request;
  */
 class ProductsController extends Controller
 {
+    private FiscalApiClient $fiscalApi;
+
+    public function __construct(FiscalApiClient $fiscalApi)
+    {
+        $this->fiscalApi = $fiscalApi;
+    }
+
+
+
     /**
      * @OA\Get(
      *     path="/api/products",
@@ -23,14 +37,11 @@ class ProductsController extends Controller
      * )
      * @return JsonResponse with hardcoded products
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        return response()->json([
-            'products' => [
-                ['id' => 1, 'name' => 'Product 1', 'price' => 100],
-                ['id' => 2, 'name' => 'Product 2', 'price' => 200],
-            ]
-        ]);
+        $response = $this->fiscalApi->getProductService()->list(1,5);
+        $data = $response->getJson();
+        return response()->json($data, $response->getStatusCode());
     }
 
     /**
@@ -45,13 +56,17 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json([
-            'product' => [
-                'id' => 1,
-                'name' => 'Product 1',
-                'price' => 100
-            ]
-        ]);
+         //Crear producto con IVA trasladado del 16% por defecto.
+         //Para crear un producto con otros impuestos, vea el ejemplo de update.
+        $data = [
+            'description' => 'Libro de PHP Con Laravel', //Descripción del producto
+            'unitPrice' => 100.00, //Precio unitario del producto sin impuestos
+        ];
+
+        //Crear producto
+        $apiResponse = $this->fiscalApi->getProductService()->create($data);
+        $data = $apiResponse->getJson();
+        return response()->json($data, $apiResponse->getStatusCode());
     }
 
     /**
@@ -71,13 +86,10 @@ class ProductsController extends Controller
      */
     public function show(string $id)
     {
-        return response()->json([
-            'product' => [
-                'id' => $id,
-                'name' => 'Product 1',
-                'price' => 100
-            ]
-        ]);
+        //Recuperar el producto con los detalles relacionados (details=true)
+        $response = $this->fiscalApi->getProductService()->get($id,true);
+        $data = $response->getJson();
+        return response()->json($data, $response->getStatusCode());
     }
 
     /**
@@ -97,13 +109,34 @@ class ProductsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return response()->json([
-            'product' => [
-                'id' => $id,
-                'name' => 'Product 1',
-                'price' => 100
+        // Actualizar producto por id
+        $data = [
+            'id' => $id,
+            'description' => 'Libro de PHP Con Laravel Avanzado',
+            'unitPrice' => 250.85,
+            'satUnitMeasurementId' => 'D63', // Unidad de medida de la SAT (D63=Unidad)
+            'satTaxObjectId' => '02', // Objeto de impuesto de la SAT (02= Si, objeto de impuesto)
+            'satProductCodeId' => '14111804', // Código de producto de la SAT (14111804=Libros)
+            'productTaxes' => [
+                [
+                    'rate' => 0.16, // Tasa del impuesto. El valor debe estar entre 0.00000 y 1.000000 p. ej. `0.160000` para un 16% de impuesto
+                    'taxId' => '002', // 001=ISR, 002=IVA, 003=IEPS
+                    'taxFlagId' => 'T', // T=Traslado o R=Retención
+                    'taxTypeId' => 'Tasa', // Tasa, Cuota o Exento
+                ],
+                [
+                    'rate' => 0.08, // Tasa del impuesto
+                    'taxId' => '003', // 001=ISR, 002=IVA, 003=IEPS
+                    'taxFlagId' => 'T', // T=Traslado o R=Retención
+                    'taxTypeId' => 'Tasa', // Tasa, Cuota o Exento
+                ]
             ]
-        ]);
+        ];
+
+        //Actualizar producto
+        $apiResponse = $this->fiscalApi->getProductService()->update($data);
+        $data = $apiResponse->getJson();
+        return response()->json($data, $apiResponse->getStatusCode());
     }
 
     /**
@@ -123,8 +156,9 @@ class ProductsController extends Controller
      */
     public function destroy(string $id)
     {
-        return response()->json([
-            'message' => 'Product deleted successfully'
-        ]);
+        //Eliminar producto por id
+        $apiResponse = $this->fiscalApi->getProductService()->delete($id);
+        $data = $apiResponse->getJson();
+        return response()->json($data, $apiResponse->getStatusCode());
     }
 }
