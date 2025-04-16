@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InvoicesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
@@ -10,6 +11,9 @@ Route::get('/user', function (Request $request) {
 
 
 Route::resource('products', ProductsController::class);
+
+
+Route::get('invoices', [InvoicesController::class, 'index']);
 
 
 // Product Routes

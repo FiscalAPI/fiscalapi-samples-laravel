@@ -6,6 +6,20 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/invoices": {
+            "get": {
+                "tags": [
+                    "Invoices"
+                ],
+                "summary": "Listar facturas",
+                "operationId": "780e617f969f44ec1575e0a949f88276",
+                "responses": {
+                    "200": {
+                        "description": "Lista de facturas"
+                    }
+                }
+            }
+        },
         "/api/products": {
             "get": {
                 "tags": [
@@ -105,6 +119,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Invoices",
+            "description": "Invoices"
+        },
         {
             "name": "Products",
             "description": "Products"
