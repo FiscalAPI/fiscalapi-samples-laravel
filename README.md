@@ -1,61 +1,139 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🚀 Laravel-FiscalAPI 
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Esta aplicación es un ejemplo de integración entre Laravel y FiscalAPI, que te permite utilizar los servicios de facturación electrónica en México de manera sencilla a través de una API RESTful.
 
-## About Laravel
+## 📋 Descripción
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Este proyecto implementa una API web con Laravel que se integra con FiscalAPI para generar documentos fiscales (CFDI). FiscalAPI simplifica la integración con los servicios de facturación electrónica, eliminando las complejidades del SAT y facilitando la generación de facturas, notas de crédito, complementos de pago, nómina, carta porte, entre otros.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ Características
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- API RESTful completa para emisión de documentos fiscales
+- Documentación con Swagger/OpenAPI
+- Base de datos SQLite para desarrollo local
+- Integración con FiscalAPI SDK
 
-## Learning Laravel
+## 📦 Requisitos
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP >= 8.1
+- Composer
+- SQLite
+- Extensiones PHP requeridas (ver sección de configuración)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## ⚙️ Configuración del entorno
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1. Configuración de PHP
 
-## Laravel Sponsors
+⚠️ **ADVERTENCIA**: Es necesario configurar correctamente tu archivo php.ini. Asegúrate de tener habilitadas las siguientes extensiones:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```ini
+extension_dir = "C:\php-8.4.6\ext"  # Ajusta esta ruta a tu instalación de PHP
+extension=fileinfo
+extension=openssl
+extension=pdo_sqlite
+extension=sqlite3
+extension=zip
+```
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+### 2. Variables de entorno
 
-## Contributing
+Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```env
+# FiscalAPI Configuration
+FISCALAPI_URL=https://test.fiscalapi.com
+FISCALAPI_KEY=sk_test_391b8980_42d0_4341_8e37_50475128d086
+FISCALAPI_TENANT=102e5f13-e114-41dd-bea7-507fce177281
+FISCALAPI_DEBUG=false
+FISCALAPI_VERIFY_SSL=false
+FISCALAPI_API_VERSION=v4
+FISCALAPI_TIMEZONE=America/Mexico_City
+```
 
-## Code of Conduct
+## 🔧 Instalación
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. Clona este repositorio:
+```bash
+git clone https://github.com/FiscalAPI/fiscalapi-samples-laravel.git
+cd fiscalapi-samples-laravel
+```
 
-## Security Vulnerabilities
+2. Instala las dependencias:
+```bash
+composer install
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+3. Genera la clave de la aplicación:
+```bash
+php artisan key:generate
+```
 
-## License
+4. Crea el archivo de base de datos SQLite:
+```bash
+touch database/database.sqlite
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. Ejecuta las migraciones:
+```bash
+php artisan migrate
+```
+
+6. Opcionalmente, carga datos de ejemplo:
+```bash
+php artisan db:seed
+```
+
+## 🚀 Uso
+
+### Iniciar servidor de desarrollo
+
+```bash
+php artisan serve
+```
+
+La aplicación estará disponible en: http://127.0.0.1:8000
+
+### Documentación de la API
+
+La documentación de la API con Swagger está disponible en:
+http://127.0.0.1:8000/api/documentation
+
+## 📝 Endpoints principales
+
+- `GET /api/clientes` - Obtener lista de clientes
+- `POST /api/facturas` - Generar una nueva factura
+- `GET /api/facturas/{id}` - Obtener detalles de una factura
+- `GET /api/facturas/{id}/pdf` - Descargar PDF de una factura
+- `GET /api/facturas/{id}/xml` - Descargar XML de una factura
+
+## 🧰 Acerca de FiscalAPI
+
+FiscalAPI es un servicio que simplifica la emisión de comprobantes fiscales en México. Con FiscalAPI puedes:
+
+- Emitir facturas (CFDI)
+- Generar notas de crédito
+- Crear complementos de pago
+- Emitir nóminas
+- Generar documentos de carta porte
+- Y más servicios fiscales electrónicos
+
+Para más información, visita [FiscalAPI](https://fiscalapi.com).
+
+### 💡 Este ejemplo depende del sdk de fiscalapi para php.
+Para más informacion, visita [fiscalapi-php](https://github.com/FiscalAPI/fiscalapi-php)
+
+
+## 👥 Contribuir
+
+Las contribuciones son bienvenidas. Para contribuir:
+
+1. Haz fork del repositorio
+2. Crea una rama para tu característica (`git checkout -b feature/nueva-caracteristica`)
+3. Haz commit de tus cambios (`git commit -m 'Agregada nueva característica'`)
+4. Sube tu rama (`git push origin feature/nueva-caracteristica`)
+5. Abre un Pull Request
+
+## 📄 Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.

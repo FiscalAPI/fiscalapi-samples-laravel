@@ -1,1 +1,78 @@
-*.sqlite*
+#*.sqlite*
+
+# Laravel specific
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+docker-compose.override.yml
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/.fleet
+/.idea
+/.vscode
+
+# PhpStorm specific
+.idea/
+.idea_modules/
+*.iml
+*.iws
+*.ipr
+out/
+.idea_modules/
+atlassian-ide-plugin.xml
+
+# Laravel Mix
+/public/css
+/public/js
+/public/mix-manifest.json
+
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Composer
+composer.phar
+/vendor/
+
+# Coverage reports
+coverage/
+*.lcov
+.nyc_output
+
+# Cache files
+*.log
+*.swp
+*.bak
+*.tmp
+*.temp
+
+# Laravel specific folders
+/bootstrap/cache/*
+!bootstrap/cache/.gitignore
+/storage/app/*
+!storage/app/.gitignore
+!storage/app/public/
+/storage/app/public/*
+!storage/app/public/.gitignore
+/storage/framework/cache/*
+!storage/framework/cache/.gitignore
+/storage/framework/sessions/*
+!storage/framework/sessions/.gitignore
+/storage/framework/testing/*
+!storage/framework/testing/.gitignore
+/storage/framework/views/*
+!storage/framework/views/.gitignore
+/storage/logs/*
+!storage/logs/.gitignore
