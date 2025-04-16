@@ -44,6 +44,7 @@ class InvoicesController extends Controller
      */
     public function index(): JsonResponse
     {
+        // pagina 1, 5 facturas por pagina.
         $response = $this->fiscalApi->getInvoiceService()->list(1,5);
         $data = $response->getJson();
         return response()->json($data, $response->getStatusCode());
@@ -58,11 +59,27 @@ class InvoicesController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/invoices/{id}",
+     *     summary="Obtener factura por ID",
+     *     tags={"Invoices"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID de la factura",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(response=200, description="Detalles de la factura")
+     * )
+     * @param string $id
+     * @return JsonResponse
      */
-    public function show(string $id)
+    public function show(string $id): JsonResponse
     {
-        //
+        $response = $this->fiscalApi->getInvoiceService()->get($id, true);
+        $data = $response->getJson();
+        return response()->json($data, $response->getStatusCode());
     }
 
     /**

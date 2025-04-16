@@ -14,7 +14,7 @@ Route::resource('products', ProductsController::class);
 
 
 Route::get('invoices', [InvoicesController::class, 'index']);
-
+Route::get('invoices/{id}', [InvoicesController::class, 'show']);
 
 // Product Routes
 // Route::prefix('products')->group(function () {

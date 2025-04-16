@@ -20,6 +20,31 @@
                 }
             }
         },
+        "/api/invoices/{id}": {
+            "get": {
+                "tags": [
+                    "Invoices"
+                ],
+                "summary": "Obtener factura por ID",
+                "operationId": "73a0b039e0d55ce07c563b2fa30c532b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la factura",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalles de la factura"
+                    }
+                }
+            }
+        },
         "/api/products": {
             "get": {
                 "tags": [
