@@ -5,10 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Info(
+ *     title="Fiscalapi con Laravel",
+ *     version="1.0.0",
+ *     description="Ejemplo básico de integración de Fiscalapi con Laravel"
+ * )
+ */
 class ProductsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/products",
+     *     summary="Mostrar lista de productos",
+     *     tags={"Products"},
+     *     @OA\Response(response=200, description="Lista de productos")
+     * )
      * @return JsonResponse with hardcoded products
      */
     public function index()
@@ -22,7 +34,12 @@ class ProductsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/api/products",
+     *     summary="Crear un nuevo producto",
+     *     tags={"Products"},
+     *     @OA\Response(response=200, description="Producto creado")
+     * )
      * @param Request $request
      * @return JsonResponse with hardcoded product
      */
@@ -38,11 +55,23 @@ class ProductsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/products/{id}",
+     *     summary="Mostrar un producto específico",
+     *     tags={"Products"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID del producto",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(response=200, description="Detalles del producto")
+     * )
      */
     public function show(string $id)
     {
-            return response()->json([
+        return response()->json([
             'product' => [
                 'id' => $id,
                 'name' => 'Product 1',
@@ -52,7 +81,19 @@ class ProductsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *     path="/api/products/{id}",
+     *     summary="Actualizar un producto existente",
+     *     tags={"Products"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID del producto",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(response=200, description="Producto actualizado")
+     * )
      */
     public function update(Request $request, string $id)
     {
@@ -66,7 +107,19 @@ class ProductsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/products/{id}",
+     *     summary="Eliminar un producto",
+     *     tags={"Products"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID del producto",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(response=200, description="Producto eliminado")
+     * )
      */
     public function destroy(string $id)
     {

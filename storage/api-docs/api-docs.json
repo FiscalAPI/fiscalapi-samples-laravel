@@ -1,0 +1,113 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Fiscalapi con Laravel",
+        "description": "Ejemplo básico de integración de Fiscalapi con Laravel",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Mostrar lista de productos",
+                "operationId": "6d8ae74dcafe19c4813904d4ea9e4c57",
+                "responses": {
+                    "200": {
+                        "description": "Lista de productos"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Crear un nuevo producto",
+                "operationId": "9f0b814cd8d69075ed70d4cc79c9f417",
+                "responses": {
+                    "200": {
+                        "description": "Producto creado"
+                    }
+                }
+            }
+        },
+        "/api/products/{id}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Mostrar un producto específico",
+                "operationId": "f6410f1810b0a90ba3d72d5b8250a27d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalles del producto"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Actualizar un producto existente",
+                "operationId": "14b6ff17cc6ce7298a06271a8bc89539",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Producto actualizado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Eliminar un producto",
+                "operationId": "3dda9543e42196cc1ff7b18d2c9f9357",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Producto eliminado"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Products",
+            "description": "Products"
+        }
+    ]
+}
