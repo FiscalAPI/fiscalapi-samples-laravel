@@ -6,13 +6,13 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/invoices": {
+        "/api/facturas": {
             "get": {
                 "tags": [
-                    "Invoices"
+                    "facturas"
                 ],
                 "summary": "Listar facturas",
-                "operationId": "780e617f969f44ec1575e0a949f88276",
+                "operationId": "0eb85ad683dec4b4858b53db81b4e2b7",
                 "responses": {
                     "200": {
                         "description": "Lista de facturas"
@@ -20,13 +20,13 @@
                 }
             }
         },
-        "/api/invoices/{id}": {
+        "/api/facturas/{id}": {
             "get": {
                 "tags": [
-                    "Invoices"
+                    "facturas"
                 ],
                 "summary": "Obtener factura por ID",
-                "operationId": "73a0b039e0d55ce07c563b2fa30c532b",
+                "operationId": "397a8619870b2ff3c87263947cb79478",
                 "parameters": [
                     {
                         "name": "id",
@@ -45,13 +45,13 @@
                 }
             }
         },
-        "/api/invoices/global": {
+        "/api/facturas/factura-global-por-valores": {
             "post": {
                 "tags": [
-                    "Invoices"
+                    "facturas"
                 ],
                 "summary": "Crear factura global por valores",
-                "operationId": "c1662357bca688a52a0469b4222f60e2",
+                "operationId": "b10e13bf8413ad44eb380b5e4efdcf7a",
                 "responses": {
                     "200": {
                         "description": "Factura global creada"
@@ -59,13 +59,13 @@
                 }
             }
         },
-        "/api/invoices/global-by-reference": {
+        "/api/facturas/factura-global-por-referencias": {
             "post": {
                 "tags": [
-                    "Invoices"
+                    "facturas"
                 ],
                 "summary": "Crear factura global por referencias",
-                "operationId": "e6b5a41ab74c91a7f76ffbcffb10aa9c",
+                "operationId": "95f1876c22b5397316f879a2b5471189",
                 "responses": {
                     "200": {
                         "description": "Factura global creada por referencias"
@@ -73,13 +73,13 @@
                 }
             }
         },
-        "/api/invoices/income-with-iva": {
+        "/api/facturas/factura-con-iva-16": {
             "post": {
                 "tags": [
-                    "Invoices"
+                    "facturas"
                 ],
                 "summary": "Crear factura de ingreso con IVA 16%",
-                "operationId": "138c467bd52d42fc5f272225b1e9ba18",
+                "operationId": "9b57e678a355e39e23b7f38c1a0cb582",
                 "responses": {
                     "200": {
                         "description": "Factura de ingreso creada con IVA 16%"
@@ -87,13 +87,13 @@
                 }
             }
         },
-        "/api/factura-iva-exento": {
+        "/api/facturas/factura-iva-exento": {
             "post": {
                 "tags": [
-                    "Invoices"
+                    "facturas"
                 ],
                 "summary": "Crear factura con IVA exento",
-                "operationId": "63615c70d4c78793ee9d4d18a01a22de",
+                "operationId": "0bc4a3028340ffc521448bfa5a7c8abb",
                 "responses": {
                     "200": {
                         "description": "Factura con IVA exento creada"
@@ -201,8 +201,8 @@
     },
     "tags": [
         {
-            "name": "Invoices",
-            "description": "Invoices"
+            "name": "facturas",
+            "description": "facturas"
         },
         {
             "name": "Products",

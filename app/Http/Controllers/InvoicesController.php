@@ -35,9 +35,9 @@ class InvoicesController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/invoices",
+     *     path="/api/facturas",
      *     summary="Listar facturas",
-     *     tags={"Invoices"},
+     *     tags={"facturas"},
      *     @OA\Response(response=200, description="Lista de facturas")
      * )
      * @return JsonResponse
@@ -53,9 +53,9 @@ class InvoicesController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/invoices/{id}",
+     *     path="/api/facturas/{id}",
      *     summary="Obtener factura por ID",
-     *     tags={"Invoices"},
+     *     tags={"facturas"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -77,9 +77,9 @@ class InvoicesController extends Controller
 
         /**
      * @OA\Post(
-     *     path="/api/invoices/global",
+     *     path="/api/facturas/factura-global-por-valores",
      *     summary="Crear factura global por valores",
-     *     tags={"Invoices"},
+     *     tags={"facturas"},
      *     @OA\Response(response=200, description="Factura global creada")
      * )
      * @return JsonResponse
@@ -157,9 +157,9 @@ class InvoicesController extends Controller
 
         /**
      * @OA\Post(
-     *     path="/api/invoices/global-by-reference",
+     *     path="/api/facturas/factura-global-por-referencias",
      *     summary="Crear factura global por referencias",
-     *     tags={"Invoices"},
+     *     tags={"facturas"},
      *     @OA\Response(response=200, description="Factura global creada por referencias")
      * )
      * @return JsonResponse
@@ -218,9 +218,9 @@ class InvoicesController extends Controller
 
     /**
     * @OA\Post(
-    *     path="/api/invoices/income-with-iva",
+    *     path="/api/facturas/factura-con-iva-16",
     *     summary="Crear factura de ingreso con IVA 16%",
-    *     tags={"Invoices"},
+    *     tags={"facturas"},
     *     @OA\Response(response=200, description="Factura de ingreso creada con IVA 16%")
     * )
     * @return JsonResponse
@@ -294,9 +294,9 @@ class InvoicesController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/factura-iva-exento",
+     *     path="/api/facturas/factura-iva-exento",
      *     summary="Crear factura con IVA exento",
-     *     tags={"Invoices"},
+     *     tags={"facturas"},
      *     @OA\Response(response=200, description="Factura con IVA exento creada")
      * )
      * @return JsonResponse
@@ -366,8 +366,6 @@ class InvoicesController extends Controller
         $data = $apiResponse->getJson();
         return response()->json($data, $apiResponse->getStatusCode());
     }
-
-
 
 
 
