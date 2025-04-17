@@ -28,3 +28,7 @@ Route::post('facturas/complemento-pago-por-referencias', [InvoicesController::cl
 Route::post('facturas/complemento-pago-usd', [InvoicesController::class, 'complementoPagoUsd']);
 Route::post('facturas/complemento-pago-mxn-usd', [InvoicesController::class, 'complementoPagoMxnUsd']);
 Route::post('facturas/complemento-pago-eur-usd', [InvoicesController::class, 'complementoPagoEurUsd']);
+Route::post('facturas/cancelar-por-valores', [InvoicesController::class, 'cancelarPorValores']);
+Route::post('facturas/cancelar-por-referencia', [InvoicesController::class, 'cancelarPorReferencia']);
+Route::post('facturas/estado-por-valores', [InvoicesController::class, 'estadoPorValores']);
+Route::post('facturas/estado-por-referencia', [InvoicesController::class, 'estadoPorReferencia']);

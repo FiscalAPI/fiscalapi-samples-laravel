@@ -1145,12 +1145,108 @@ class InvoicesController extends Controller
     }
 
 
+    /**
+    * @OA\Post(
+    *     path="/api/facturas/cancelar-por-valores",
+    *     summary="Cancelar una factura por valores",
+    *     tags={"Facturas"},
+    *     @OA\Response(response=200, description="Factura cancelada correctamente")
+    * )
+    * @return JsonResponse
+    */
+    public function cancelarPorValores(Request $request): JsonResponse
+    {
+        $cancelInvoice = [
+            'invoiceUuid' => "3802efc4-20e2-49d7-81f8-73a82f5dbdc4", // UUID de la factura a cancelar
+            'tin' => "FUNK671228PH6", // RFC del emisor
+            'cancellationReasonCode' => "01", // Código de razón de cancelación: 01 - Comprobante emitido con errores con relación
+            'replacementUuid' => "de841944-bd4f-4bb8-adfe-2a2282787c62", // UUID de la factura que sustituye
+            'taxCredentials' => [
+                [
+                    'base64File' => $this->base64Cert,
+                    'fileType' => 0,
+                    'password' => $this->password
+                ],
+                [
+                    'base64File' => $this->base64Key,
+                    'fileType' => 1,
+                    'password' => $this->password
+                ]
+            ]
+        ];
+
+        $apiResponse = $this->fiscalApi->getInvoiceService()->cancel($cancelInvoice);
+        $data = $apiResponse->getJson();
+        return response()->json($data, $apiResponse->getStatusCode());
+    }
 
 
+    /**
+    * @OA\Post(
+    *     path="/api/facturas/cancelar-por-referencia",
+    *     summary="Cancelar una factura por ID (por referencia)",
+    *     tags={"Facturas"},
+    *     @OA\Response(response=200, description="Factura cancelada correctamente por referencia")
+    * )
+    * @return JsonResponse
+    */
+    public function cancelarPorReferencia(Request $request): JsonResponse
+    {
+        $cancelInvoice = [
+            'id' => "18da484c-1fb3-4598-ad3b-79a47054419b", // ID de referencia de la factura a cancelar
+            'cancellationReasonCode' => "01", // 01 - Comprobante emitido con errores con relación  // opcional cuando se utiliza 02 (Comprobante emitido con errores sin relación)
+            'replacementUuid' => "de841944-bd4f-4bb8-adfe-2a2282787c62" // UUID de la factura que sustituye  // opcional cuando se utiliza 02 (Comprobante emitido con errores sin relación)
+        ];
+
+        $apiResponse = $this->fiscalApi->getInvoiceService()->cancel($cancelInvoice);
+        $data = $apiResponse->getJson();
+        return response()->json($data, $apiResponse->getStatusCode());
+    }
 
 
+    /**
+     * @OA\Post(
+     *     path="/api/facturas/estado-por-valores",
+     *     summary="Obtener el estado de una factura por valores",
+     *     tags={"Facturas"},
+     *     @OA\Response(response=200, description="Estado de la factura obtenido por valores")
+     * )
+     * @return JsonResponse
+     */
+    public function estadoPorValores(Request $request): JsonResponse
+    {
+        $invoiceStatus = [
+            'issuerTin' => "POPJ450924HD6",        // RFC del emisor
+            'recipientTin' => "MEJJ940824C61",     // RFC del receptor
+            'invoiceTotal' => 430.00,              // Total de la factura
+            'invoiceUuid' => "8e0fdc23-e148-4cf5-b3ce-4459f31c9c45", // UUID de la factura
+            'last8DigitsIssuerSignature' => "oxPKRg==" // Últimos 8 dígitos del sello digital del emisor
+        ];
 
+        $apiResponse = $this->fiscalApi->getInvoiceService()->getStatus($invoiceStatus);
+        $data = $apiResponse->getJson();
+        return response()->json($data, $apiResponse->getStatusCode());
+    }
 
+    /**
+     * @OA\Post(
+     *     path="/api/facturas/estado-por-referencia",
+     *     summary="Obtener el estado de una factura por ID (por referencia)",
+     *     tags={"Facturas"},
+     *     @OA\Response(response=200, description="Estado de la factura obtenido por referencia")
+     * )
+     * @return JsonResponse
+     */
+    public function estadoPorReferencia(Request $request): JsonResponse
+    {
+        $invoiceStatus = [
+            'id' => "80b9e246-095a-4af0-8c26-d9c210f740e4",
+        ];
+
+        $apiResponse = $this->fiscalApi->getInvoiceService()->getStatus($invoiceStatus);
+        $data = $apiResponse->getJson();
+        return response()->json($data, $apiResponse->getStatusCode());
+    }
 
 
 

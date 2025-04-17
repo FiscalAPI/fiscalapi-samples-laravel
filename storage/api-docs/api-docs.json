@@ -227,6 +227,62 @@
                 }
             }
         },
+        "/api/facturas/cancelar-por-valores": {
+            "post": {
+                "tags": [
+                    "Facturas"
+                ],
+                "summary": "Cancelar una factura por valores",
+                "operationId": "b1cde0d015a61519f5dbdf548b30e743",
+                "responses": {
+                    "200": {
+                        "description": "Factura cancelada correctamente"
+                    }
+                }
+            }
+        },
+        "/api/facturas/cancelar-por-referencia": {
+            "post": {
+                "tags": [
+                    "Facturas"
+                ],
+                "summary": "Cancelar una factura por ID (por referencia)",
+                "operationId": "a94df19b0f212ff97ef25fd563269a44",
+                "responses": {
+                    "200": {
+                        "description": "Factura cancelada correctamente por referencia"
+                    }
+                }
+            }
+        },
+        "/api/facturas/estado-por-valores": {
+            "post": {
+                "tags": [
+                    "Facturas"
+                ],
+                "summary": "Obtener el estado de una factura por valores",
+                "operationId": "98a8da6a91963701769b9089cbd92b84",
+                "responses": {
+                    "200": {
+                        "description": "Estado de la factura obtenido por valores"
+                    }
+                }
+            }
+        },
+        "/api/facturas/estado-por-referencia": {
+            "post": {
+                "tags": [
+                    "Facturas"
+                ],
+                "summary": "Obtener el estado de una factura por ID (por referencia)",
+                "operationId": "0c98376b222b04b31a639b449ffd6da8",
+                "responses": {
+                    "200": {
+                        "description": "Estado de la factura obtenido por referencia"
+                    }
+                }
+            }
+        },
         "/api/products": {
             "get": {
                 "tags": [
