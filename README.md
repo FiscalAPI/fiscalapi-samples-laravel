@@ -107,33 +107,48 @@ http://127.0.0.1:8000/api/documentation
 - `GET /api/facturas/{id}/pdf` - Descargar PDF de una factura
 - `GET /api/facturas/{id}/xml` - Descargar XML de una factura
 
-## 🧰 Acerca de FiscalAPI
-
-FiscalAPI es un servicio que simplifica la emisión de comprobantes fiscales en México. Con FiscalAPI puedes:
-
-- Emitir facturas (CFDI)
-- Generar notas de crédito
-- Crear complementos de pago
-- Emitir nóminas
-- Generar documentos de carta porte
-- Y más servicios fiscales electrónicos
-
-Para más información, visita [FiscalAPI](https://fiscalapi.com).
-
-### 💡 Este ejemplo depende del sdk de fiscalapi para php.
-Para más informacion, visita [fiscalapi-php](https://github.com/FiscalAPI/fiscalapi-php)
 
 
-## 👥 Contribuir
+## 📋 Operaciones Principales
 
-Las contribuciones son bienvenidas. Para contribuir:
+- **Facturas (CFDI)**  
+  Crear facturas de ingreso, notas de crédito, complementos de pago, cancelaciones, generación de PDF/XML.
+- **Personas (Clientes/Emisores)**  
+  Alta y administración de personas, gestión de certificados (CSD).
+- **Productos y Servicios**  
+  Administración de catálogos de productos, búsqueda en catálogos SAT.
 
-1. Haz fork del repositorio
-2. Crea una rama para tu característica (`git checkout -b feature/nueva-caracteristica`)
-3. Haz commit de tus cambios (`git commit -m 'Agregada nueva característica'`)
-4. Sube tu rama (`git push origin feature/nueva-caracteristica`)
-5. Abre un Pull Request
+
+## 🤝 Contribuir
+
+1. Haz un fork del repositorio.  
+2. Crea una rama para tu feature: `git checkout -b feature/AmazingFeature`.  
+3. Realiza commits de tus cambios: `git commit -m 'Add some AmazingFeature'`.  
+4. Sube tu rama: `git push origin feature/AmazingFeature`.  
+5. Abre un Pull Request en GitHub.
+
+
+## 🐛 Reportar Problemas
+
+1. Asegúrate de usar la última versión del SDK.  
+2. Verifica si el problema ya fue reportado.  
+3. Proporciona un ejemplo mínimo reproducible.  
+4. Incluye los mensajes de error completos.
+
 
 ## 📄 Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+Este proyecto está licenciado bajo la Licencia **MPL**. Consulta el archivo [LICENSE](LICENSE.txt) para más detalles.
+
+
+## 🔗 Enlaces Útiles
+
+- [Documentación Oficial](https://docs.fiscalapi.com)  
+- [Portal de FiscalAPI](https://fiscalapi.com)  
+- [Ejemplos PHP](https://github.com/FiscalAPI/fiscalapi-php/blob/main/examples.php)  
+- [Ejemplos Laravel](https://github.com/FiscalAPI/fiscalapi-samples-laravel)
+
+
+---
+
+Desarrollado con ❤️ por [Fiscalapi](https://www.fiscalapi.com)
