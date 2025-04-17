@@ -23,5 +23,5 @@ Route::post('facturas/factura-iva-tasa-cero', [InvoicesController::class, 'factu
 Route::post('facturas/factura-por-referencias', [InvoicesController::class, 'facturaPorReferencias']);
 Route::post('facturas/nota-credito', [InvoicesController::class, 'notaCredito']);
 Route::post('facturas/nota-credito-por-referencias', [InvoicesController::class, 'notaCreditoPorReferencias']);
-
+Route::post('facturas/complemento-pago', [InvoicesController::class, 'complementoPago']);
 

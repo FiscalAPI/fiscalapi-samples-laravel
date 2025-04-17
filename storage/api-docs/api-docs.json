@@ -157,6 +157,20 @@
                 }
             }
         },
+        "/api/facturas/complemento-pago": {
+            "post": {
+                "tags": [
+                    "Facturas"
+                ],
+                "summary": "Crear un complemento de pago por valores",
+                "operationId": "1ddf3922e67f0d5cbe3706af6df4c3ac",
+                "responses": {
+                    "200": {
+                        "description": "Complemento de pago creado"
+                    }
+                }
+            }
+        },
         "/api/products": {
             "get": {
                 "tags": [
