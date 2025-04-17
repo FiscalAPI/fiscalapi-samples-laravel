@@ -208,7 +208,21 @@
                 "operationId": "5711d197feb38c8950041e577185c742",
                 "responses": {
                     "200": {
-                        "description": "Complemento de pago en MXN para facturas USD creado"
+                        "description": "Complemento de pago en MXN para facturas creadas en USD"
+                    }
+                }
+            }
+        },
+        "/api/facturas/complemento-pago-eur-usd": {
+            "post": {
+                "tags": [
+                    "Facturas"
+                ],
+                "summary": "Complemento de pago en EUR para facturas en USD",
+                "operationId": "03fad47c6941c641d9d10e26179c5942",
+                "responses": {
+                    "200": {
+                        "description": "Complemento de pago en EUR para facturas creadas en USD "
                     }
                 }
             }

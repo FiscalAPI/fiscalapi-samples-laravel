@@ -27,3 +27,4 @@ Route::post('facturas/complemento-pago', [InvoicesController::class, 'complement
 Route::post('facturas/complemento-pago-por-referencias', [InvoicesController::class, 'complementoPagoPorReferencias']);
 Route::post('facturas/complemento-pago-usd', [InvoicesController::class, 'complementoPagoUsd']);
 Route::post('facturas/complemento-pago-mxn-usd', [InvoicesController::class, 'complementoPagoMxnUsd']);
+Route::post('facturas/complemento-pago-eur-usd', [InvoicesController::class, 'complementoPagoEurUsd']);
