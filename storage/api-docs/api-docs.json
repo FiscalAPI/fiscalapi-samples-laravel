@@ -9,7 +9,7 @@
         "/api/facturas": {
             "get": {
                 "tags": [
-                    "facturas"
+                    "Facturas"
                 ],
                 "summary": "Listar facturas",
                 "operationId": "0eb85ad683dec4b4858b53db81b4e2b7",
@@ -23,7 +23,7 @@
         "/api/facturas/{id}": {
             "get": {
                 "tags": [
-                    "facturas"
+                    "Facturas"
                 ],
                 "summary": "Obtener factura por ID",
                 "operationId": "397a8619870b2ff3c87263947cb79478",
@@ -48,7 +48,7 @@
         "/api/facturas/factura-global-por-valores": {
             "post": {
                 "tags": [
-                    "facturas"
+                    "Facturas"
                 ],
                 "summary": "Crear factura global por valores",
                 "operationId": "b10e13bf8413ad44eb380b5e4efdcf7a",
@@ -62,7 +62,7 @@
         "/api/facturas/factura-global-por-referencias": {
             "post": {
                 "tags": [
-                    "facturas"
+                    "Facturas"
                 ],
                 "summary": "Crear factura global por referencias",
                 "operationId": "95f1876c22b5397316f879a2b5471189",
@@ -76,7 +76,7 @@
         "/api/facturas/factura-con-iva-16": {
             "post": {
                 "tags": [
-                    "facturas"
+                    "Facturas"
                 ],
                 "summary": "Crear factura de ingreso con IVA 16%",
                 "operationId": "9b57e678a355e39e23b7f38c1a0cb582",
@@ -90,13 +90,41 @@
         "/api/facturas/factura-iva-exento": {
             "post": {
                 "tags": [
-                    "facturas"
+                    "Facturas"
                 ],
                 "summary": "Crear factura con IVA exento",
                 "operationId": "0bc4a3028340ffc521448bfa5a7c8abb",
                 "responses": {
                     "200": {
                         "description": "Factura con IVA exento creada"
+                    }
+                }
+            }
+        },
+        "/api/facturas/factura-iva-tasa-cero": {
+            "post": {
+                "tags": [
+                    "Facturas"
+                ],
+                "summary": "Crear factura con IVA tasa cero",
+                "operationId": "786372fe613b3036a28bed23a44e04a1",
+                "responses": {
+                    "200": {
+                        "description": "Factura con IVA tasa cero creada"
+                    }
+                }
+            }
+        },
+        "/api/facturas/factura-por-referencias": {
+            "post": {
+                "tags": [
+                    "Facturas"
+                ],
+                "summary": "Crear factura de ingreso por referencias (solo IDs)",
+                "operationId": "21c4ca9bbe3c6b37e09e94a3771029e9",
+                "responses": {
+                    "200": {
+                        "description": "Factura de ingreso por referencias creada"
                     }
                 }
             }
@@ -201,8 +229,8 @@
     },
     "tags": [
         {
-            "name": "facturas",
-            "description": "facturas"
+            "name": "Facturas",
+            "description": "Facturas"
         },
         {
             "name": "Products",

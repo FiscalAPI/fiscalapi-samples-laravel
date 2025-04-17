@@ -19,8 +19,8 @@ Route::post('facturas/factura-global-por-valores', [InvoicesController::class, '
 Route::post('facturas/factura-global-por-referencias', [InvoicesController::class, 'facturaGlobalPorReferencias']);
 Route::post('facturas/factura-con-iva-16', [InvoicesController::class, 'facturaConIva16']);
 Route::post('facturas/factura-iva-exento', [InvoicesController::class, 'facturaIvaExento']);
-
-
+Route::post('facturas/factura-iva-tasa-cero', [InvoicesController::class, 'facturaIvaTasaCero']);
+Route::post('facturas/factura-por-referencias', [InvoicesController::class, 'facturaPorReferencias']);
 
 
 
