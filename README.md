@@ -43,8 +43,8 @@ Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
 ```env
 # FiscalAPI Configuration
 FISCALAPI_URL=https://test.fiscalapi.com
-FISCALAPI_KEY=sk_test_391b8980_42d0_4341_8e37_50475128d086
-FISCALAPI_TENANT=102e5f13-e114-41dd-bea7-507fce177281
+FISCALAPI_KEY=<api-key>
+FISCALAPI_TENANT=<tenant>
 FISCALAPI_DEBUG=false
 FISCALAPI_VERIFY_SSL=false
 FISCALAPI_API_VERSION=v4
