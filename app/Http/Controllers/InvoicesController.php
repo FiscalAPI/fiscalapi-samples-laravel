@@ -487,6 +487,169 @@ class InvoicesController extends Controller
     return response()->json($data, $apiResponse->getStatusCode());
     }
 
+    /**
+    * @OA\Post(
+    *     path="/api/facturas/nota-credito",
+    *     summary="Crear nota de crédito por valores",
+    *     tags={"Facturas"},
+    *     @OA\Response(response=200, description="Nota de crédito creada")
+    * )
+    * @return JsonResponse
+    */
+    public function notaCredito(): JsonResponse
+    {
+    $currentDate = $this->getCurrentDate();
+
+    $creditNote = [
+        'versionCode' => "4.0",
+        'series' => "CN", // Serie CN para notas de crédito
+        'date' => $currentDate,
+        'paymentFormCode' => "03", // 03 - Transferencia electrónica de fondos
+        'currencyCode' => "MXN",
+        'typeCode' => "E", // Tipo E para notas de crédito (Egreso)
+        'expeditionZipCode' => "01160",
+        'paymentMethodCode' => "PUE",
+        'exchangeRate' => 1,
+        'exportCode' => "01",
+        'issuer' => [
+            'tin' => "FUNK671228PH6",
+            'legalName' => "KARLA FUENTE NOLASCO",
+            'taxRegimeCode' => "621",
+            'taxCredentials' => [
+                [
+                    'base64File' => $this->base64Cert,
+                    'fileType' => 0,
+                    'password' => $this->password
+                ],
+                [
+                    'base64File' => $this->base64Key,
+                    'fileType' => 1,
+                    'password' => $this->password
+                ]
+            ]
+        ],
+        'recipient' => [
+            'tin' => "EKU9003173C9",
+            'legalName' => "ESCUELA KEMPER URGATE",
+            'zipCode' => "42501",
+            'taxRegimeCode' => "601",
+            'cfdiUseCode' => "G01",
+            'email' => "someone@somewhere.com"
+        ],
+        // Facturas relacionadas - necesarias para notas de crédito
+        'relatedInvoices' => [
+            [
+                'uuid' => "5FB2822E-396D-4725-8521-CDC4BDD20CCF", // UUID de la factura original
+                'relationshipTypeCode' => "01" // 01 - Nota de crédito de los documentos relacionados
+            ]
+        ],
+        'items' => [
+            [
+                'itemCode' => "01010101",
+                'quantity' => 0.5,
+                'unitOfMeasurementCode' => "E48",
+                'description' => "Invoicing software as a service",
+                'unitPrice' => 3587.75,
+                'taxObjectCode' => "02", // Código de obligaciones de impuesto aplicables al producto o servicio. Catálogo c_ObjetoImp
+                'itemSku' => "7506022301697",
+                'itemTaxes' => [
+                    [
+                        'taxCode' => "002", // 001=ISR, 002=IVA, 003=IEPS
+                        'taxTypeCode' => "Tasa", // Tipo de factor. Catálogo del SAT c_TipoFactor
+                        'taxRate' => "0.160000", // Tasa 16%
+                        'taxFlagCode' => "T"  // T=Traslado o R=Retención
+                    ]
+                ]
+            ]
+        ]
+    ];
+
+    $apiResponse = $this->fiscalApi->getInvoiceService()->create($creditNote);
+    $data = $apiResponse->getJson();
+    return response()->json($data, $apiResponse->getStatusCode());
+    }
+
+
+    /**
+    * @OA\Post(
+    *     path="/api/facturas/nota-credito-por-referencias",
+    *     summary="Crear nota de crédito por referencias",
+    *     tags={"Facturas"},
+    *     @OA\Response(response=200, description="Nota de crédito creada por referencias")
+    * )
+    * @return JsonResponse
+    */
+    public function notaCreditoPorReferencias(Request $request): JsonResponse
+    {
+        $currentDate = $this->getCurrentDate();
+
+        $creditNoteByReferences = [
+            'versionCode' => "4.0",
+            'series' => "CN",
+            'date' => $currentDate,
+            'paymentFormCode' => "03",
+            'currencyCode' => "MXN",
+            'typeCode' => "E", // Tipo E para notas de crédito (Egreso)
+            'expeditionZipCode' => "01160",
+            'paymentMethodCode' => "PUE",
+            'exchangeRate' => 1,
+            'exportCode' => "01",
+            'issuer' => [
+                'id' => "78d380fd-1b69-4e3c-8bc0-4f57737f7d5f" // ID del emisor en fiscalapi
+            ],
+            'recipient' => [
+                'id' => "bef56254-0892-4558-95c3-f9c8729e4b0e" // ID del receptor en fiscalapi
+            ],
+            // Importante: Las facturas relacionadas siempre son necesarias para notas de crédito
+            'relatedInvoices' => [
+                [
+                    'uuid' => "5FB2822E-396D-4725-8521-CDC4BDD20CCF",
+                    'relationshipTypeCode' => "01" // 01 - Nota de crédito de los documentos relacionados
+                ]
+            ],
+            'items' => [
+                [
+                    'id' => "310301b3-1ae9-441b-b463-51a8f9ca8ba2", // ID del producto/servicio en fiscalapi
+                    'quantity' => 0.5 // La cantidad que se está acreditando/devolviendo
+                ]
+            ]
+        ];
+
+    $apiResponse = $this->fiscalApi->getInvoiceService()->create($creditNoteByReferences);
+    $data = $apiResponse->getJson();
+    return response()->json($data, $apiResponse->getStatusCode());
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
      /**
      * Definir la fecha actual

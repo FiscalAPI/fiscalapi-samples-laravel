@@ -129,6 +129,34 @@
                 }
             }
         },
+        "/api/facturas/nota-credito": {
+            "post": {
+                "tags": [
+                    "Facturas"
+                ],
+                "summary": "Crear nota de crédito por valores",
+                "operationId": "25b5b1581b126f8d60ae38b52cd70ce3",
+                "responses": {
+                    "200": {
+                        "description": "Nota de crédito creada"
+                    }
+                }
+            }
+        },
+        "/api/facturas/nota-credito-por-referencias": {
+            "post": {
+                "tags": [
+                    "Facturas"
+                ],
+                "summary": "Crear nota de crédito por referencias",
+                "operationId": "a5d5deb6095b0d0b3462b7832474a04f",
+                "responses": {
+                    "200": {
+                        "description": "Nota de crédito creada por referencias"
+                    }
+                }
+            }
+        },
         "/api/products": {
             "get": {
                 "tags": [
