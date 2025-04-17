@@ -468,14 +468,14 @@ class InvoicesController extends Controller
         'exchangeRate' => 1,
         'exportCode' => "01",
         'issuer' => [
-            'id' => "78d380fd-1b69-4e3c-8bc0-4f57737f7d5f"
+            'id' => "78d380fd-1b69-4e3c-8bc0-4f57737f7d5f" // ID del emisor en fiscalapi
         ],
         'recipient' => [
-            'id' => "bef56254-0892-4558-95c3-f9c8729e4b0e"
+            'id' => "bef56254-0892-4558-95c3-f9c8729e4b0e" // ID del receptor en fiscalapi
         ],
         'items' => [
             [
-                'id' => "310301b3-1ae9-441b-b463-51a8f9ca8ba2", // ID del producto/servicio
+                'id' => "310301b3-1ae9-441b-b463-51a8f9ca8ba2", // ID del producto/servicio en fiscalapi
                 'quantity' => 2, // Solo es necesario especificar la cantidad
                 'discount' => 25.85 // Y opcionalmente el descuento
             ]
