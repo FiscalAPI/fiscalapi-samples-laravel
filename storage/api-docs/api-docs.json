@@ -185,6 +185,20 @@
                 }
             }
         },
+        "/api/facturas/complemento-pago-usd": {
+            "post": {
+                "tags": [
+                    "Facturas"
+                ],
+                "summary": "Complemento de pago en USD para facturas en MXN",
+                "operationId": "bbe923f4321065b21b0812cd954d047d",
+                "responses": {
+                    "200": {
+                        "description": "Complemento de pago en USD creado"
+                    }
+                }
+            }
+        },
         "/api/products": {
             "get": {
                 "tags": [
