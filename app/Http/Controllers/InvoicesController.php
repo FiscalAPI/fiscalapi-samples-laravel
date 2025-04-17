@@ -722,7 +722,79 @@ class InvoicesController extends Controller
         return response()->json($data, $apiResponse->getStatusCode());
     }
 
+    /**
+    * @OA\Post(
+    *     path="/api/facturas/complemento-pago-por-referencias",
+    *     summary="Crear un complemento de pago por referencias",
+    *     tags={"Facturas"},
+    *     @OA\Response(response=200, description="Complemento de pago creado por referencias")
+    * )
+    * @return JsonResponse
+    */
+    public function complementoPagoPorReferencias(Request $request): JsonResponse
+    {
+        $currentDate = $this->getCurrentDate();
 
+        $invoice = [
+            'versionCode' => "4.0",
+            'series' => "CP", // Serie CP para complementos de pago
+            'date' => $currentDate,
+            'currencyCode' => "XXX", // Para complementos de pago se usa XXX
+            'typeCode' => "P", // Tipo P para complementos de pago
+            'expeditionZipCode' => "01160",
+            'exchangeRate' => 1,
+            'exportCode' => "01",
+            'issuer' => [
+                'id' => "78d380fd-1b69-4e3c-8bc0-4f57737f7d5f" // ID del emisor en fiscalapi
+            ],
+            'recipient' => [
+                'id' => "bef56254-0892-4558-95c3-f9c8729e4b0e" // ID del receptor en fiscalapi
+            ],
+            // Nota: No se necesita la sección "items" cuando se usa el enfoque por referencias,
+            // ya que el sistema generará automáticamente el concepto requerido
+
+            // Sección de pagos - específica para complementos de pago
+            'payments' => [
+                [
+                    'paymentDate' => "2025-03-31T14:44:56", // Actualizado a una fecha más reciente
+                    'paymentFormCode' => "28", // 28 - Tarjeta de débito
+                    'currencyCode' => "MXN",
+                    'exchangeRate' => 1,
+                    'amount' => 11600.00, // Monto total del pago
+                    'sourceBankTin' => "BSM970519DU8", // RFC del banco emisor
+                    'sourceBankAccount' => "1234567891012131", // Cuenta del banco emisor
+                    'targetBankTin' => "BBA830831LJ2", // RFC del banco receptor
+                    'targetBankAccount' => "1234567890", // Cuenta del banco receptor
+                    'paidInvoices' => [
+                        [
+                            'uuid' => "5C7B0622-01B4-4EB8-96D0-E0DEBD89FF0F", // UUID de la factura que se está pagando
+                            'series' => "F",
+                            'number' => "1501",
+                            'currencyCode' => "MXN",
+                            'partialityNumber' => 1, // Número de parcialidad (1 si es pago único)
+                            'subTotal' => 10000,
+                            'previousBalance' => 11600.00, // Saldo anterior
+                            'paymentAmount' => 11600.00, // Cantidad pagada
+                            'remainingBalance' => 0, // Saldo restante
+                            'taxObjectCode' => "02",
+                            'paidInvoiceTaxes' => [
+                                [
+                                    'taxCode' => "002",
+                                    'taxTypeCode' => "Tasa",
+                                    'taxRate' => "0.160000", // Como string para mantener precisión
+                                    'taxFlagCode' => "T"
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $apiResponse = $this->fiscalApi->getInvoiceService()->create($invoice);
+        $data = $apiResponse->getJson();
+        return response()->json($data, $apiResponse->getStatusCode());
+    }
 
 
 
