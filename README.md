@@ -64,25 +64,11 @@ cd fiscalapi-samples-laravel
 composer install
 ```
 
-3. Genera la clave de la aplicación:
-```bash
-php artisan key:generate
-```
-
-4. Crea el archivo de base de datos SQLite:
-```bash
-touch database/database.sqlite
-```
-
-5. Ejecuta las migraciones:
+3. Ejecuta las migraciones:
 ```bash
 php artisan migrate
 ```
 
-6. Opcionalmente, carga datos de ejemplo:
-```bash
-php artisan db:seed
-```
 
 ## 🚀 Uso
 
@@ -98,15 +84,6 @@ La aplicación estará disponible en: http://127.0.0.1:8000
 
 La documentación de la API con Swagger está disponible en:
 http://127.0.0.1:8000/api/documentation
-
-## 📝 Endpoints principales
-
-- `GET /api/clientes` - Obtener lista de clientes
-- `POST /api/facturas` - Generar una nueva factura
-- `GET /api/facturas/{id}` - Obtener detalles de una factura
-- `GET /api/facturas/{id}/pdf` - Descargar PDF de una factura
-- `GET /api/facturas/{id}/xml` - Descargar XML de una factura
-
 
 
 ## 📋 Operaciones Principales
