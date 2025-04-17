@@ -6,6 +6,140 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/catalogos/listar": {
+            "get": {
+                "tags": [
+                    "Catalogos"
+                ],
+                "summary": "Listar catálogos",
+                "operationId": "25ed77284cef1444909cb09a43bf3118",
+                "parameters": [
+                    {
+                        "name": "pagina",
+                        "in": "query",
+                        "description": "Número de página",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "limite",
+                        "in": "query",
+                        "description": "Límite de registros por página",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 100,
+                            "example": 100
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de catálogos"
+                    }
+                }
+            }
+        },
+        "/api/catalogos/{nombre}/{id}": {
+            "get": {
+                "tags": [
+                    "Catalogos"
+                ],
+                "summary": "Obtener registro de catálogo por ID",
+                "description": "Obtiene un registro específico de un catálogo por su ID. Ejemplo: Obtiene el registro '03' (Transferencia electrónica de fondos) del catálogo de formas de pago (SatPaymentForms)",
+                "operationId": "b9205297e4761c2cac6e4c15fa8f1046",
+                "parameters": [
+                    {
+                        "name": "nombre",
+                        "in": "path",
+                        "description": "Nombre del catálogo (ej: SatPaymentForms para formas de pago)",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "SatPaymentForms"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del registro en el catálogo (ej: 03 para Transferencia electrónica de fondos)",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "03"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registro del catálogo"
+                    }
+                }
+            }
+        },
+        "/api/catalogos/buscar": {
+            "get": {
+                "tags": [
+                    "Catalogos"
+                ],
+                "summary": "Buscar en un catálogo",
+                "description": "Busca registros en un catálogo según un término. Ejemplo: Busca en el catálogo de formas de pago (SatPaymentForms) todos los registros que contengan la palabra 'Tarjeta'",
+                "operationId": "40bc9b3a2ff066f89698837487ae52a8",
+                "parameters": [
+                    {
+                        "name": "catalogo",
+                        "in": "query",
+                        "description": "Nombre del catálogo (ej: SatPaymentForms)",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "SatPaymentForms"
+                        }
+                    },
+                    {
+                        "name": "termino",
+                        "in": "query",
+                        "description": "Término a buscar (ej: Tarjeta)",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Tarjeta"
+                        }
+                    },
+                    {
+                        "name": "pagina",
+                        "in": "query",
+                        "description": "Número de página",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "limite",
+                        "in": "query",
+                        "description": "Límite de registros por página",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 100,
+                            "example": 100
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resultados de la búsqueda en el catálogo"
+                    }
+                }
+            }
+        },
         "/api/facturas": {
             "get": {
                 "tags": [
@@ -463,6 +597,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Catalogos",
+            "description": "Catalogos"
+        },
         {
             "name": "Facturas",
             "description": "Facturas"

@@ -4,7 +4,7 @@ use App\Http\Controllers\InvoicesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
-
+use App\Http\Controllers\CatalogsController;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
@@ -38,3 +38,7 @@ Route::post('facturas/pdf-por-referencia', [InvoicesController::class, 'pdfPorRe
 Route::get('facturas/xml/{id}', [InvoicesController::class, 'xml']);
 Route::post('facturas/enviar-por-valores', [InvoicesController::class, 'enviarPorValores']);
 Route::post('facturas/enviar-por-referencia', [InvoicesController::class, 'enviarPorReferencia']);
+
+Route::get('catalogos/listar', [CatalogsController::class, 'listar']);
+Route::get('catalogos/{nombre}/{id}', [CatalogsController::class, 'obtenerPorId']);
+Route::get('catalogos/buscar', [CatalogsController::class, 'buscar']);

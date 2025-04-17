@@ -1,6 +1,39 @@
 <?php
+/**
+ * ┌───────────────────────────────────────────────────────────────────────────────┐
+ * │                          IMPORTANTE - AVISO                                   │
+ * │                                                                               │
+ * │ Este controlador ha sido creado con fines exclusivamente demostrativos.       │
+ * │                                                                               │
+ * │ La mayoría de los datos están hardcodeados directamente en las acciones       │
+ * │ del controlador para facilitar las pruebas inmediatas sin necesidad de        │
+ * │ configurar cuerpos de peticiones. Esto permite probar la funcionalidad        │
+ * │ simplemente haciendo clic en el botón "Probar" de Swagger.                    │
+ * │                                                                               │
+ * │ ADVERTENCIA: Las rutas y cURL paths generados por Swagger en esta aplicación  │
+ * │ NO CORRESPONDEN CON LAS rutas y recursos de FiscalAPI, son generados          │
+ * │ localmente para la aplicación. Para ver las rutas y todo el API reference     │
+ * │ visite: https://docs.fiscalapi.com                                            │
+ * │                                                                               │
+ * │ En esta aplicación de ejemplo solo se han creado dos controladores:           │
+ * │ el de productos y el de factura, para demostrar el funcionamiento             │
+ * │ básico de la API. Si desea ver ejemplos de todos los recursos                 │
+ * │ disponibles en la API, visite los ejemplos completos de PHP en:               │
+ * │ https://github.com/FiscalAPI/fiscalapi-php/blob/main/examples.php             │
+ * │                                                                               │
+ * │ Este código NO representa una arquitectura limpia ni sigue las mejores        │
+ * │ prácticas para aplicaciones en producción. Aunque el SDK de FiscalAPI         │
+ * │ implementa las mejores prácticas internamente, esta aplicación de             │
+ * │ ejemplo en Laravel está diseñada priorizando la simplicidad y facilidad       │
+ * │ de prueba.                                                                    │
+ * │                                                                               │
+ * │ En un entorno de producción, se recomienda utilizar una arquitectura          │
+ * │ apropiada con separación de responsabilidades, validación adecuada,           │
+ * │ manejo de errores, autenticación, autorización, etc.                          │
+ * └───────────────────────────────────────────────────────────────────────────────┘
+ */
 
-declare(strict_types=1);
+ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
