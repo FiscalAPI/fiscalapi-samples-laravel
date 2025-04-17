@@ -283,6 +283,87 @@
                 }
             }
         },
+        "/api/facturas/pdf-por-valores": {
+            "post": {
+                "tags": [
+                    "Facturas"
+                ],
+                "summary": "Generar PDF de una factura por valores",
+                "operationId": "cdf681119f5afc0cec411da27a0dbdc4",
+                "responses": {
+                    "200": {
+                        "description": "PDF de la factura generado por valores"
+                    }
+                }
+            }
+        },
+        "/api/facturas/pdf-por-referencia": {
+            "post": {
+                "tags": [
+                    "Facturas"
+                ],
+                "summary": "Generar PDF por ID (por referencia)",
+                "operationId": "e49d080ab608904407b0d4630fe1b2cb",
+                "responses": {
+                    "200": {
+                        "description": "PDF de la factura generado por referencia"
+                    }
+                }
+            }
+        },
+        "/api/facturas/xml/{id}": {
+            "get": {
+                "tags": [
+                    "Facturas"
+                ],
+                "summary": "Descargar XML por ID",
+                "operationId": "f5c18abaa4e43d8c359e33e5fe6f695e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la factura",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "XML de la factura"
+                    }
+                }
+            }
+        },
+        "/api/facturas/enviar-por-valores": {
+            "post": {
+                "tags": [
+                    "Facturas"
+                ],
+                "summary": "Enviar factura por correo (por valores)",
+                "operationId": "7e2cf16086cf08b59035997cf439be33",
+                "responses": {
+                    "200": {
+                        "description": "Factura enviada por correo usando valores"
+                    }
+                }
+            }
+        },
+        "/api/facturas/enviar-por-referencia": {
+            "post": {
+                "tags": [
+                    "Facturas"
+                ],
+                "summary": "Enviar factura por correo por ID (por referencias)",
+                "operationId": "e0dbcb640fa56d3224be3fbc77495b75",
+                "responses": {
+                    "200": {
+                        "description": "Factura enviada por correo usando referencias"
+                    }
+                }
+            }
+        },
         "/api/products": {
             "get": {
                 "tags": [

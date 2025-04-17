@@ -912,8 +912,6 @@ class InvoicesController extends Controller
     }
 
 
-
-
     /**
     * @OA\Post(
     *     path="/api/facturas/complemento-pago-mxn-usd",
@@ -1248,7 +1246,118 @@ class InvoicesController extends Controller
         return response()->json($data, $apiResponse->getStatusCode());
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/facturas/pdf-por-valores",
+     *     summary="Generar PDF de una factura por valores",
+     *     tags={"Facturas"},
+     *     @OA\Response(response=200, description="PDF de la factura generado por valores")
+     * )
+     * @return JsonResponse
+     */
+    public function pdfPorValores(Request $request): JsonResponse
+    {
+        $invoicePdf = [
+            "invoiceId" => "d0e08a9c-ecd1-4143-b922-65677aaaf820",
+            "bandColor" => "#FFA500",
+            "fontColor" => "#FFFFFF",
+            "base64Logo" => $this->base64Logo
+        ];
 
+        $apiResponse = $this->fiscalApi->getInvoiceService()->getPdf($invoicePdf);
+        $data = $apiResponse->getJson();
+        return response()->json($data, $apiResponse->getStatusCode());
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/facturas/pdf-por-referencia",
+     *     summary="Generar PDF por ID (por referencia)",
+     *     tags={"Facturas"},
+     *     @OA\Response(response=200, description="PDF de la factura generado por referencia")
+     * )
+     * @return JsonResponse
+     */
+    public function pdfPorReferencia(Request $request): JsonResponse
+    {
+        $invoicePdf = [
+            "invoiceId" => "d0e08a9c-ecd1-4143-b922-65677aaaf820",
+        ];
+
+        $apiResponse = $this->fiscalApi->getInvoiceService()->getPdf($invoicePdf);
+        $data = $apiResponse->getJson();
+        return response()->json($data, $apiResponse->getStatusCode());
+    }
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/facturas/xml/{id}",
+     *     summary="Descargar XML por ID",
+     *     tags={"Facturas"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID de la factura",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(response=200, description="XML de la factura")
+     * )
+     * @param string $id
+     * @return JsonResponse
+     */
+    public function xml(string $id): JsonResponse
+    {
+        $apiResponse = $this->fiscalApi->getInvoiceService()->getXml($id);
+        $data = $apiResponse->getJson();
+        return response()->json($data, $apiResponse->getStatusCode());
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/facturas/enviar-por-valores",
+     *     summary="Enviar factura por correo (por valores)",
+     *     tags={"Facturas"},
+     *     @OA\Response(response=200, description="Factura enviada por correo usando valores")
+     * )
+     * @return JsonResponse
+     */
+    public function enviarPorValores(Request $request): JsonResponse
+    {
+        $emailRequest = [
+            "invoiceId" => "d0e08a9c-ecd1-4143-b922-65677aaaf820",
+            "bandColor" => "#FFA500",
+            "fontColor" => "#FFFFFF",
+            "toEmail" => "mail@domain.com",
+            "base64Logo" => $this->base64Logo
+        ];
+
+        $apiResponse = $this->fiscalApi->getInvoiceService()->send($emailRequest);
+        $data = $apiResponse->getJson();
+        return response()->json($data, $apiResponse->getStatusCode());
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/facturas/enviar-por-referencia",
+     *     summary="Enviar factura por correo por ID (por referencias)",
+     *     tags={"Facturas"},
+     *     @OA\Response(response=200, description="Factura enviada por correo usando referencias")
+     * )
+     * @return JsonResponse
+     */
+    public function enviarPorReferencia(Request $request): JsonResponse
+    {
+        $emailRequest = [
+            "invoiceId" => "d0e08a9c-ecd1-4143-b922-65677aaaf820",
+            "toEmail" => "contacto@fiscalapi.com",
+        ];
+
+        $apiResponse = $this->fiscalApi->getInvoiceService()->send($emailRequest);
+        $data = $apiResponse->getJson();
+        return response()->json($data, $apiResponse->getStatusCode());
+    }
 
 
 

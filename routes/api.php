@@ -32,3 +32,9 @@ Route::post('facturas/cancelar-por-valores', [InvoicesController::class, 'cancel
 Route::post('facturas/cancelar-por-referencia', [InvoicesController::class, 'cancelarPorReferencia']);
 Route::post('facturas/estado-por-valores', [InvoicesController::class, 'estadoPorValores']);
 Route::post('facturas/estado-por-referencia', [InvoicesController::class, 'estadoPorReferencia']);
+
+Route::post('facturas/pdf-por-valores', [InvoicesController::class, 'pdfPorValores']);
+Route::post('facturas/pdf-por-referencia', [InvoicesController::class, 'pdfPorReferencia']);
+Route::get('facturas/xml/{id}', [InvoicesController::class, 'xml']);
+Route::post('facturas/enviar-por-valores', [InvoicesController::class, 'enviarPorValores']);
+Route::post('facturas/enviar-por-referencia', [InvoicesController::class, 'enviarPorReferencia']);
