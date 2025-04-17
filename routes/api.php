@@ -13,12 +13,12 @@ Route::get('/user', function (Request $request) {
 Route::resource('products', ProductsController::class);
 
 
-Route::get('invoices', [InvoicesController::class, 'index']);
-Route::get('invoices/{id}', [InvoicesController::class, 'show']);
-Route::post('invoices/factura-global-por-valores', [InvoicesController::class, 'facturaGlobalPorValores']);
-Route::post('invoices/factura-global-por-referencias', [InvoicesController::class, 'facturaGlobalPorReferencias']);
-Route::post('invoices/factura-con-iva-16', [InvoicesController::class, 'facturaConIva16']);
-Route::post('invoices/factura-iva-exento', [InvoicesController::class, 'facturaIvaExento']);
+Route::get('facturas', [InvoicesController::class, 'index']);
+Route::get('facturas/{id}', [InvoicesController::class, 'show']);
+Route::post('facturas/factura-global-por-valores', [InvoicesController::class, 'facturaGlobalPorValores']);
+Route::post('facturas/factura-global-por-referencias', [InvoicesController::class, 'facturaGlobalPorReferencias']);
+Route::post('facturas/factura-con-iva-16', [InvoicesController::class, 'facturaConIva16']);
+Route::post('facturas/factura-iva-exento', [InvoicesController::class, 'facturaIvaExento']);
 
 
 
