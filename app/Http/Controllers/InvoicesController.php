@@ -109,7 +109,8 @@ class InvoicesController extends Controller
         return response()->json($data, $response->getStatusCode());
     }
 
-        /**
+
+    /**
      * @OA\Post(
      *     path="/api/facturas/factura-global-por-valores",
      *     summary="Crear factura global por valores",
@@ -135,7 +136,7 @@ class InvoicesController extends Controller
             'exportCode' => "01",
             'globalInformation' => [
                 'periodicityCode' => "01", // Periodicidad 01 = Diario
-                'monthCode' => "01",       // Mes  01 = Enero
+                'monthCode' => "05",       // Mes 05 = Mayo (changed from "01")
                 'year' => 2025             // Año fiscal
             ],
             'issuer' => [
@@ -171,7 +172,7 @@ class InvoicesController extends Controller
                     'description' => "Venta", // Fijo
                     'unitPrice' => 1230.00, // Total de la venta sin impuestos
                     'taxObjectCode' => "02",     // 02 = Sí objeto de impuesto
-                    'itemSku' => "1",            // Indentificador interno de la venta
+                    'itemSku' => "venta0001",    // Indentificador interno (changed from "1")
                     'itemTaxes' => [
                         [
                             'taxCode' => "002",           // 002 = IVA | 001 = ISR | 003 = IEPS
@@ -189,7 +190,7 @@ class InvoicesController extends Controller
         return response()->json($data, $apiResponse->getStatusCode());
     }
 
-        /**
+    /**
      * @OA\Post(
      *     path="/api/facturas/factura-global-por-referencias",
      *     summary="Crear factura global por referencias",
@@ -214,15 +215,15 @@ class InvoicesController extends Controller
             'exchangeRate' => 1, // Tipo de cambio
             'exportCode' => "01",
             'globalInformation' => [
-                'periodicityCode' => "02", // Periodicidad 02 = Semanal
-                'monthCode' => "02",       // Mes 02 = Febrero
+                'periodicityCode' => "01", // Periodicidad 01 = Diario (changed from "02")
+                'monthCode' => "05",       // Mes 05 = Mayo (changed from "02")
                 'year' => 2025             // Año fiscal
             ],
             'issuer' => [
                 'id' => "78d380fd-1b69-4e3c-8bc0-4f57737f7d5f" // ID del emisor
             ],
             'recipient' => [
-                'id' => "bef56254-0892-4558-95c3-f9c8729e4b0e" // ID del receptor
+                'id' => "4e7ba2d7-2302-42f1-9fe4-6b75069f0fc9" // ID del receptor (changed)
             ],
             'items' => [
                 [
@@ -232,7 +233,7 @@ class InvoicesController extends Controller
                     'description' => "Venta", // Fijo
                     'unitPrice' => 1230.00, // Total de la venta sin impuestos
                     'taxObjectCode' => "02", // 02 = Sí objeto de impuesto
-                    'itemSku' => "1", // Identificador interno de la venta
+                    'itemSku' => "venta0001", // Identificador interno (changed from "1")
                     'itemTaxes' => [
                         [
                             'taxCode' => "002",           // 002 = IVA
@@ -249,6 +250,7 @@ class InvoicesController extends Controller
         $data = $apiResponse->getJson();
         return response()->json($data, $apiResponse->getStatusCode());
     }
+
 
     /**
     * @OA\Post(
